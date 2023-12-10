@@ -1,4 +1,4 @@
-package project;
+package manager;
 
 public class BookBorrower {
     private String idBookBorrower;
