@@ -3,15 +3,13 @@ package model.objects;
 public class Book {
     private String idBook;
     private String nameBook;
-    private int number;
     private String category;
     private String author;
     private String status;
 
-    public Book(String idBook, String nameBook, int number, String category, String author, String status) {
+    public Book(String idBook, String nameBook, String category, String author, String status) {
         this.idBook = idBook;
         this.nameBook = nameBook;
-        this.number = number;
         this.category = category;
         this.author = author;
         this.status = status;
@@ -31,14 +29,6 @@ public class Book {
 
     public void setNameBook(String nameBook) {
         this.nameBook = nameBook;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public String getCategory() {
@@ -70,7 +60,6 @@ public class Book {
         return "Book{" +
                 "idBook='" + idBook + '\'' +
                 ", nameBook='" + nameBook + '\'' +
-                ", number=" + number +
                 ", category='" + category + '\'' +
                 ", author='" + author + '\'' +
                 ", status='" + status + '\'' +
