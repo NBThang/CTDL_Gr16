@@ -1,4 +1,4 @@
-package manager;
+package objects;
 
 import java.util.Date;
 

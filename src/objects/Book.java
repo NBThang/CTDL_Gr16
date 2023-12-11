@@ -1,4 +1,4 @@
-package manager;
+package objects;
 
 public class Book {
     private String idBook;
