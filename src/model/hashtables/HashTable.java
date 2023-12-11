@@ -1,6 +1,8 @@
 package model.hashtables;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class HashTable<K, V> {
     private static final int DEFAULT_CAPACITY = 10;
@@ -70,25 +72,19 @@ public class HashTable<K, V> {
         return Math.abs(hashCode) % buckets.length;
     }
 
-    private static class Entry<K, V> {
-        private K key;
-        private V value;
+    public List<V> getAllValues() {
+        List<V> allValues = new ArrayList<>();
 
-        public Entry(K key, V value) {
-            this.key = key;
-            this.value = value;
+        for (LinkedList<Entry<K, V>> bucket : buckets) {
+            for (Entry<K, V> entry : bucket) {
+                allValues.add(entry.getValue());
+            }
         }
 
-        public K getKey() {
-            return key;
-        }
+        return allValues;
+    }
 
-        public V getValue() {
-            return value;
-        }
-
-        public void setValue(V value) {
-            this.value = value;
-        }
+    public LinkedList<Entry<K, V>>[] getBuckets() {
+        return buckets;
     }
 }
