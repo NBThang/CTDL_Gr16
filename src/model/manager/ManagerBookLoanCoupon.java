@@ -1,4 +1,6 @@
-package manager;
+package model.manager;
+
+import model.objects.BookLoanCoupon;
 
 import java.util.List;
 

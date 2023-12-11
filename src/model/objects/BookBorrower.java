@@ -1,4 +1,4 @@
-package objects;
+package model.objects;
 
 public class BookBorrower {
     private String idBookBorrower;

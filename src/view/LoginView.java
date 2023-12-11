@@ -1,5 +1,7 @@
 package view;
 
+import model.objects.User;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,8 +14,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.WindowConstants;
-
-import objects.User;
 
 public class LoginView extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;

@@ -1,4 +1,6 @@
-package manager;
+package model.manager;
+
+import model.objects.BookBorrower;
 
 import java.util.List;
 

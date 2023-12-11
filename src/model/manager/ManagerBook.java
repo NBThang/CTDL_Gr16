@@ -1,4 +1,7 @@
-package manager;
+package model.manager;
+
+
+import model.objects.Book;
 
 import java.util.List;
 
