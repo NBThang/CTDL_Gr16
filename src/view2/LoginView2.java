@@ -3,6 +3,15 @@ package view2;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import view.BookView;
+
+import javax.swing.*;
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /**
  *
  * @author Name
@@ -16,6 +25,13 @@ public class LoginView2 extends javax.swing.JFrame {
         initComponents();
     }
 
+    String driver = "com.microsoft.sqlserver.jdbc.SQLSeverDriver";
+    String url = "jdbc:mySQL://localhost:3306/dangnhap";
+    String user = "root";
+    String password = "";
+    Statement st;
+    ResultSet rs;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -24,6 +40,7 @@ public class LoginView2 extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+        this.setTitle("Login");
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -43,9 +60,17 @@ public class LoginView2 extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnloginActionPerformed(evt);
             }
+
         });
 
         btndn.setText("Đăng nhập");
+
+        btndn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndnActionPerformed(evt);
+            }
+
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,13 +112,37 @@ public class LoginView2 extends javax.swing.JFrame {
         );
 
         pack();
+
     }// </editor-fold>
 
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        RegisterView lgv = new RegisterView();
-        lgv.run();
-        this.dispose();
+        RegisterView2 rgv= new RegisterView2();
+        rgv.setVisible(true);
+    }
+
+    private void btndnActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            String sql = "select*from account where USENAME=? and PASS=?"; // truy van den sql
+            PreparedStatement ps = con.prepareCall(sql);
+            ps.setString(1, txtuserdn.getText());
+            ps.setString(2, txtpassdn.getText());
+
+            rs = ps.executeQuery();
+            if (txtuserdn.getText().equals("") || txtpassdn.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "chưa điền thông tin");
+            } else if (rs.next()) {
+                BookView bv = new BookView();
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "tài khoản không chính xác");
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Đăng nhập thất bại");
+        }
     }
 
     /**
@@ -130,6 +179,35 @@ public class LoginView2 extends javax.swing.JFrame {
             }
         });
     }
+
+    public void run() {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(LoginView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(LoginView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(LoginView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LoginView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LoginView2().setVisible(true);
+            }
+        });
+    }
+
+
 
     // Variables declaration - do not modify
     private javax.swing.JButton btndn;

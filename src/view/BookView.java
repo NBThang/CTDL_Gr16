@@ -236,6 +236,10 @@ public class BookView extends JFrame implements ActionListener, ListSelectionLis
         SwingUtilities.invokeLater(() -> new BookView());
     }
 
+    public void run() {
+        SwingUtilities.invokeLater(() -> new BookView());
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
