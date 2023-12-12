@@ -1,6 +1,5 @@
 package controller;
 
-import view.BookView;
 import view.LoginView;
 
 import javax.swing.*;
@@ -15,6 +14,6 @@ public class LoginController implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        SwingUtilities.invokeLater(() -> new BookView());
+//        SwingUtilities.invokeLater(() -> new BookView());
     }
 }

@@ -7,12 +7,14 @@ public class Book {
     private String author;
     private String status;
 
-    public Book(String idBook, String nameBook, String category, String author, String status) {
+    public Book() {
+    }
+
+    public Book(String idBook, String nameBook, String category, String author) {
         this.idBook = idBook;
         this.nameBook = nameBook;
         this.category = category;
         this.author = author;
-        this.status = status;
     }
 
     public String getIdBook() {
@@ -62,7 +64,6 @@ public class Book {
                 ", nameBook='" + nameBook + '\'' +
                 ", category='" + category + '\'' +
                 ", author='" + author + '\'' +
-                ", status='" + status + '\'' +
                 '}';
     }
 }
