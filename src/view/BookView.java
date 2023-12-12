@@ -1,13 +1,15 @@
 package view;
 
+import controller.BookViewController;
 import model.objects.Book;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-class BookView extends JFrame {
+public class BookView extends JFrame {
     private ArrayList<Book> books;
     private JButton addBookBtn;
     private JButton deleteBookBtn;
@@ -123,7 +125,6 @@ class BookView extends JFrame {
         deleteBookBtn.setEnabled(false);
 
         addBookBtn.setEnabled(true);
-
     }
 
     public void showMessage(String message) {

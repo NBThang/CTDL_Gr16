@@ -1,19 +1,12 @@
 package view;
 
+import controller.LoginController;
 import model.objects.User;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SpringLayout;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 public class LoginView extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
@@ -25,6 +18,7 @@ public class LoginView extends JFrame implements ActionListener {
 
     public LoginView() {
         initComponents();
+        setVisible(true);
     }
 
     private void initComponents() {
@@ -37,6 +31,10 @@ public class LoginView extends JFrame implements ActionListener {
 
         loginBtn.setText("Login");
         loginBtn.addActionListener(this);
+
+        ActionListener ac = new LoginController(this);
+
+        loginBtn.addActionListener(ac);
 
         // tạo spring layout
         SpringLayout layout = new SpringLayout();
@@ -85,5 +83,9 @@ public class LoginView extends JFrame implements ActionListener {
 
     public void addLoginListener(ActionListener listener) {
         loginBtn.addActionListener(listener);
+    }
+
+    public static void main (String[]args){
+        SwingUtilities.invokeLater(() -> new LoginView());
     }
 }
