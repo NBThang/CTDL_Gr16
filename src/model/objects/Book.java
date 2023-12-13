@@ -5,12 +5,11 @@ public class Book {
     private String nameBook;
     private String category;
     private String author;
-    private String status;
 
     public Book() {
     }
 
-    public Book(String idBook, String nameBook, String category, String author) {
+    public Book(String idBook, String nameBook, String author, String category) {
         this.idBook = idBook;
         this.nameBook = nameBook;
         this.category = category;
@@ -47,14 +46,6 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     @Override
