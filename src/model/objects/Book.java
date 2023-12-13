@@ -5,11 +5,17 @@ public class Book {
     private String nameBook;
     private String category;
     private String author;
+    private String status;
 
-    public Book() {
+    public Book(String idBook, String nameBook, String category, String author, String status) {
+        this.idBook = idBook;
+        this.nameBook = nameBook;
+        this.category = category;
+        this.author = author;
+        this.status = status;
     }
 
-    public Book(String idBook, String nameBook, String author, String category) {
+    public Book(String idBook, String nameBook, String category, String author) {
         this.idBook = idBook;
         this.nameBook = nameBook;
         this.category = category;
@@ -48,6 +54,14 @@ public class Book {
         this.author = author;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -55,6 +69,7 @@ public class Book {
                 ", nameBook='" + nameBook + '\'' +
                 ", category='" + category + '\'' +
                 ", author='" + author + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

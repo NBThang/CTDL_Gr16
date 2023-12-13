@@ -2,8 +2,8 @@ package view2;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-import view.BookView;
+//
+//import view.BookView;
 
 import javax.swing.*;
 import java.beans.Statement;
@@ -135,7 +135,7 @@ public class LoginView2 extends javax.swing.JFrame {
             if (txtuserdn.getText().equals("") || txtpassdn.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "chưa điền thông tin");
             } else if (rs.next()) {
-                BookView bv = new BookView();
+//                BookView bv = new BookView();
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "tài khoản không chính xác");

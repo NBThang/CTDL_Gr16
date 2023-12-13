@@ -232,6 +232,7 @@ public class BookView2 extends javax.swing.JFrame {
         });
     }
 
+
     private void displayTable(List<Book> list) {
 //        Book b = list.get(i)
     }

@@ -5,6 +5,9 @@ import model.hashtables.Entry;
 import model.hashtables.HashTable;
 import model.objects.Book;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class ManagerBook {
@@ -18,18 +21,16 @@ public class ManagerBook {
     public void addBook(Book book){
         hashTable.put(book.getIdBook(), book);
 
-        boolean check = false;
-        if (listBook.size() == 0) {
-            listBook.add(book);
-        } else {
-            for (int i = 0; i < listBook.size(); i++) {
-                if (listBook.get(i).getIdBook().equals(book.getIdBook())) {
-                    check = true;
-                }
+        boolean alreadyExists = false;
+
+        for (Book existingBook : listBook) {
+            if (existingBook.getIdBook().equals(book.getIdBook())) {
+                alreadyExists = true;
+                break;
             }
         }
 
-        if (check == false) {
+        if (!alreadyExists) {
             listBook.add(book);
         }
     }
@@ -141,34 +142,8 @@ public class ManagerBook {
         return hashTable.size();
     }
 
-    public static void main(String[] args) {
-        ManagerBook m = new ManagerBook();
-        Book b1 = new Book("1", "2", "3", "4");
-        Book b2 = new Book("1", "2", "3", "4");
-        Book b3 = new Book("2", "2", "3", "4");
-        Book b4 = new Book("3", "2", "3", "4");
-        Book b5 = new Book("3", "2", "3", "4");
-        Book b6 = new Book("4", "2", "3", "4");
-        Book b7 = new Book("5", "2", "3", "4");
-        System.out.println();
-        m.addBook(b1);
-        System.out.println(m.size());
-        m.addBook(b2);
-        System.out.println(m.size());
-        m.addBook(b3);
-        System.out.println(m.size());
-        m.addBook(b4);
-        System.out.println(m.size());
-        m.addBook(b5);
-        System.out.println(m.size());
-        m.addBook(b6);
-        System.out.println(m.size());
-        m.addBook(b7);
-        System.out.println(m.size());
 
-        for (int i = 0; i < m.size(); i++) {
-            System.out.print(m.listBook.get(i).getIdBook());
-        }
+    public static void main(String[] args) {
 
     }
 }
