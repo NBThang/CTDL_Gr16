@@ -20,11 +20,11 @@ import java.util.*;
 
 public class ManagerBook {
     private HashTable<String, Book> hashTable;
-    private List<Book> listBook;
+    private List<Book> listBook ;
     public ManagerBook() {
         this.hashTable = new HashTable<>();
         listBook = new ArrayList<>();
-//        getDataToTable();
+        getData();
     }
 
     private String driver = "com.microsoft.sqlserver.jdbc.SQLSeverDriver";
@@ -158,7 +158,8 @@ public class ManagerBook {
     }
 
     public int size() {
-        return hashTable.size();
+//        return hashTable.size();
+        return listBook.size();
     }
 
     private void addSQL(Book b) {
@@ -186,39 +187,72 @@ public class ManagerBook {
         }
     }
 
-//    public void getDataToTable(){
-//        try {
-//            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-//            Connection con = DriverManager.getConnection(url, user, password);
-//            String sql = "select * from book";
-//            PreparedStatement pst = con.prepareStatement(sql);
-//            ResultSet rs = pst.executeQuery();
-//
-//            ResultSetMetaData stData = rs.getMetaData();
-//
-//            int q = stData.getColumnCount();
-//
-//            DefaultTableModel recordTable = (DefaultTableModel) bookView2.jtable.getModel();
-//            recordTable.setRowCount(0);
-//
-//            while (rs.next()) {
-//
-//                for (int i = 1; i <= q; i++) {
-//                    String id = rs.getString("id");
-//                    String tensach = rs.getString("tensach");
-//                    String tacgia = rs.getString("tacgia");
-//                    String theloai = rs.getString("theloai");
-//
-//                    Book b = new Book(id, tensach, tacgia, theloai);
-//
-//                    listBook.add(b);
-//                    hashTable.put(b.getIdBook(), b);
-//                }
-//            }
-//        } catch (Exception e) {
-//
-//        }
-//    }
+    public void getData(){
+        try {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            Connection con = DriverManager.getConnection(url, user, password);
+            String sql = "select * from book";
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            ResultSetMetaData stData = rs.getMetaData();
+
+            int q = stData.getColumnCount();
+
+
+            while (rs.next()) {
+                for (int i = 1; i <= q; i++) {
+                    String id = rs.getString("id");
+                    String tensach = rs.getString("tensach");
+                    String tacgia = rs.getString("tacgia");
+                    String theloai = rs.getString("theloai");
+
+                    Book b = new Book(id, tensach, tacgia, theloai);
+
+                    listBook.add(b);
+                    hashTable.put(b.getIdBook(), b);
+                }
+                if (rs.getString("id") == null) {
+                    return;
+                }
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    private List getDataToList() {
+        List<Book> list = new ArrayList<>();
+        try {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            Connection con = DriverManager.getConnection(url, user, password);
+            String sql = "select * from book";
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            ResultSetMetaData stData = rs.getMetaData();
+
+            int q = stData.getColumnCount();
+
+
+            while (rs.next()) {
+                for (int i = 1; i <= q; i++) {
+                    String id = rs.getString("id");
+                    String tensach = rs.getString("tensach");
+                    String tacgia = rs.getString("tacgia");
+                    String theloai = rs.getString("theloai");
+
+                    Book b = new Book(id, tensach, tacgia, theloai);
+
+                    list.add(b);
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+        return list;
+    }
 
     private void remoteSQL(Book b) {
         try {
