@@ -8,8 +8,11 @@ import model.objects.Book;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.beans.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  *
@@ -19,6 +22,13 @@ public class BookView2 extends javax.swing.JFrame {
     private ManagerBook manegerBook;
     DefaultTableModel model;
 
+    private String driver = "com.microsoft.sqlserver.jdbc.SQLSeverDriver";
+    private String url = "jdbc:mySQL://localhost:3306/bookdata";
+    private String user = "root";
+    private String password = "";
+    private Statement st;
+    private ResultSet rs;
+
     /**
      * Creates new form BookView
      */
@@ -26,6 +36,7 @@ public class BookView2 extends javax.swing.JFrame {
         initComponents();
         this.manegerBook = new ManagerBook();
         model = (DefaultTableModel) jtable.getModel();
+        getDataToTable();
     }
 
     /**
@@ -82,7 +93,7 @@ public class BookView2 extends javax.swing.JFrame {
 
                 },
                 new String [] {
-                        "ID", "Tên Sách", "Thể Loại", "Tình trạng"
+                        "ID", "Tên Sách", "Thể Loại", "Tác Giả"
                 }
         ));
         jScrollPane1.setViewportView(jtable);
@@ -237,6 +248,38 @@ public class BookView2 extends javax.swing.JFrame {
 //        Book b = list.get(i)
     }
 
+    public void getDataToTable(){
+        try {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            Connection con = DriverManager.getConnection(url, user, password);
+            String sql = "select * from book";
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+
+            ResultSetMetaData stData = rs.getMetaData();
+
+            int q = stData.getColumnCount();
+
+            DefaultTableModel recordTable = (DefaultTableModel) jtable.getModel();
+            recordTable.setRowCount(0);
+
+            while (rs.next()) {
+                Vector columdata = new Vector<>();
+
+                for (int i = 1; i <= q; i++) {
+                    columdata.add(rs.getString("id"));
+                    columdata.add(rs.getString("tensach"));
+                    columdata.add(rs.getString("tacgia"));
+                    columdata.add(rs.getString("theloai"));
+                }
+
+                recordTable.addRow(columdata);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -283,11 +326,12 @@ public class BookView2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbsearch;
-    private javax.swing.JTable jtable;
+    public javax.swing.JTable jtable;
     private javax.swing.JTextField txtauthor;
     private javax.swing.JTextField txtcategory;
     private javax.swing.JTextField txtid;
     private javax.swing.JTextField txtsearch;
     private javax.swing.JTextField txttitle;
     // End of variables declaration
+
 }

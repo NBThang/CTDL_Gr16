@@ -5,6 +5,8 @@ package view2;/*
 //
 //import view.BookView;
 
+import view.BookView2;
+
 import javax.swing.*;
 import java.beans.Statement;
 import java.sql.Connection;
@@ -135,7 +137,9 @@ public class LoginView2 extends javax.swing.JFrame {
             if (txtuserdn.getText().equals("") || txtpassdn.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "chưa điền thông tin");
             } else if (rs.next()) {
-//                BookView bv = new BookView();
+                BookView2 bv = new BookView2();
+                bv.setVisible(true);
+
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "tài khoản không chính xác");

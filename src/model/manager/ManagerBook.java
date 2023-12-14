@@ -4,10 +4,18 @@ package model.manager;
 import model.hashtables.Entry;
 import model.hashtables.HashTable;
 import model.objects.Book;
+import view.BookView2;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.*;
+
+import java.beans.Statement;
+
 import java.util.*;
 
 public class ManagerBook {
@@ -16,9 +24,17 @@ public class ManagerBook {
     public ManagerBook() {
         this.hashTable = new HashTable<>();
         listBook = new ArrayList<>();
+//        getDataToTable();
     }
 
-    public void addBook(Book book){
+    private String driver = "com.microsoft.sqlserver.jdbc.SQLSeverDriver";
+    private String url = "jdbc:mySQL://localhost:3306/bookdata";
+    private String user = "root";
+    private String password = "";
+    private Statement st;
+    private ResultSet rs;
+
+    public void addBook(Book book) {
         hashTable.put(book.getIdBook(), book);
 
         boolean alreadyExists = false;
@@ -32,6 +48,7 @@ public class ManagerBook {
 
         if (!alreadyExists) {
             listBook.add(book);
+            this.addSQL(book);
         }
     }
     public void removeBook(Book book){
@@ -43,6 +60,8 @@ public class ManagerBook {
         }
 
         listBook.remove(book);
+
+        this.remoteSQL(book);
     }
     public Book searchBookById(String idBook){
         return hashTable.get(idBook);
@@ -142,8 +161,83 @@ public class ManagerBook {
         return hashTable.size();
     }
 
+    private void addSQL(Book b) {
+        try {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            java.sql.Statement st = con.createStatement();
+            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai)" +
+                    " VALUES("+b.getIdBook()+" , "+b.getNameBook()+" , "+b.getAuthor()+" , "+b.getCategory()+")";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            int n = ps.executeUpdate();
+
+            BookView2 bv = new BookView2();
+
+            if (n != 0) {
+                int resuil = st.executeUpdate(sql);
+            } else {
+                JOptionPane.showMessageDialog(bv, "Thêm sách thất bại");
+            }
+
+        } catch (Exception e){
+
+        }
+    }
+
+//    public void getDataToTable(){
+//        try {
+//            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+//            Connection con = DriverManager.getConnection(url, user, password);
+//            String sql = "select * from book";
+//            PreparedStatement pst = con.prepareStatement(sql);
+//            ResultSet rs = pst.executeQuery();
+//
+//            ResultSetMetaData stData = rs.getMetaData();
+//
+//            int q = stData.getColumnCount();
+//
+//            DefaultTableModel recordTable = (DefaultTableModel) bookView2.jtable.getModel();
+//            recordTable.setRowCount(0);
+//
+//            while (rs.next()) {
+//
+//                for (int i = 1; i <= q; i++) {
+//                    String id = rs.getString("id");
+//                    String tensach = rs.getString("tensach");
+//                    String tacgia = rs.getString("tacgia");
+//                    String theloai = rs.getString("theloai");
+//
+//                    Book b = new Book(id, tensach, tacgia, theloai);
+//
+//                    listBook.add(b);
+//                    hashTable.put(b.getIdBook(), b);
+//                }
+//            }
+//        } catch (Exception e) {
+//
+//        }
+//    }
+
+    private void remoteSQL(Book b) {
+        try {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            java.sql.Statement st = con.createStatement();
+            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai)" +
+                    " VALUES("+b.getIdBook()+" , "+b.getNameBook()+" , "+b.getAuthor()+" , "+b.getCategory()+")";
+
+            int resuil = st.executeUpdate(sql);
+
+        } catch (Exception e){
+
+        }
+    }
 
     public static void main(String[] args) {
-
+        ManagerBook m = new ManagerBook();
+        System.out.println(m.listBook.get(0).getIdBook());
     }
 }

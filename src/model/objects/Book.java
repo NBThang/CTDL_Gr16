@@ -7,15 +7,7 @@ public class Book {
     private String author;
     private String status;
 
-    public Book(String idBook, String nameBook, String category, String author, String status) {
-        this.idBook = idBook;
-        this.nameBook = nameBook;
-        this.category = category;
-        this.author = author;
-        this.status = status;
-    }
-
-    public Book(String idBook, String nameBook, String category, String author) {
+    public Book(String idBook, String nameBook, String author, String category) {
         this.idBook = idBook;
         this.nameBook = nameBook;
         this.category = category;
