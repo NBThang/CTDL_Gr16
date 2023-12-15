@@ -1,7 +1,4 @@
-package view;/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+package view;
 
 import model.manager.ManagerBook;
 import model.objects.Book;
@@ -211,6 +208,11 @@ public class BookView2 extends javax.swing.JFrame {
 
     private void btnsearchActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        if (txtsearch.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Chưa nhập thông tin");
+            return;
+        }
+
         if (jcbsearch.getSelectedItem().equals("ID")) {
             List<Book> list = new ArrayList<>();
             Book book = manegerBook.searchBookById(txtsearch.getText());
@@ -241,11 +243,6 @@ public class BookView2 extends javax.swing.JFrame {
         model.addRow(new Object[] {
                 b.getIdBook(), b.getNameBook(), b.getCategory(), b.getAuthor()
         });
-    }
-
-
-    private void displayTable(List<Book> list) {
-//        Book b = list.get(i)
     }
 
     public void getDataToTable(){
@@ -326,7 +323,7 @@ public class BookView2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbsearch;
-    public javax.swing.JTable jtable;
+    private javax.swing.JTable jtable;
     private javax.swing.JTextField txtauthor;
     private javax.swing.JTextField txtcategory;
     private javax.swing.JTextField txtid;
