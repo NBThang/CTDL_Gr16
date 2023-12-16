@@ -4,24 +4,27 @@ import model.hashtables.HashTable;
 import model.manager.ManagerBook;
 import model.objects.Book;
 
+import javax.swing.*;
 import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-////        Book b1 = new Book("1", "thang", 1, "tieu thuyet", "A", "da muon");
-////        Book b2 = new Book("2", "tuan", 1, "tieu thuyet", "b", "da muon");
-////        Book b3 = new Book("3", "tuan", 1, "tieu thuyet", "C", "da muon");
-////        Book b4 = new Book("4", "lam", 1, "tieu thuyet", "A", "da muon");
-//
-//        ManagerBook managerBook = new ManagerBook();
-//
-////        managerBook.addBook(b1);
-////        managerBook.addBook(b2);
-////        managerBook.addBook(b3);
-////        managerBook.addBook(b4);
-//
-//        List<Book> list = managerBook.searchBookByAuthor("A");
-//        print(list);
+        init();
+    }
+
+    public static void init() {
+        JTabbedPane m = new JTabbedPane();
+//        BookView2 bookView2 = new BookView2();
+//        BookBrrower bookBrrower = new BookBrrower();
+        JFrame j1 = new JFrame();
+        JFrame j2 = new JFrame();
+
+        m.add(j1);
+        m.add(j2);
+
+//        m.add(bookView2);
+//        m.add(bookBrrower);
+        m.setVisible(true);
     }
 
     public static void print(List<Book> list) {

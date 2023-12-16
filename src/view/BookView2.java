@@ -20,7 +20,7 @@ public class BookView2 extends javax.swing.JFrame {
     DefaultTableModel model;
 
     private String driver = "com.microsoft.sqlserver.jdbc.SQLSeverDriver";
-    private String url = "jdbc:mySQL://localhost:3306/bookdata";
+    private String url = "jdbc:mySQL://127.0.0.1:3306/bookdata";
     private String user = "root";
     private String password = "";
     private Statement st;
@@ -44,6 +44,7 @@ public class BookView2 extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+        this.setTitle("BookView");
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -61,6 +62,7 @@ public class BookView2 extends javax.swing.JFrame {
         jtable = new javax.swing.JTable();
         btnadd = new javax.swing.JButton();
         btnsearch = new javax.swing.JButton();
+        btnsdm = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,12 +80,12 @@ public class BookView2 extends javax.swing.JFrame {
 
         jLabel7.setText("Từ Khóa");
 
-        jcbsearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Tên Sách"}));
-//        jcbsearch.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jcbsearchActionPerformed(evt);
-//            }
-//        });
+        jcbsearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Tên sách"}));
+        jcbsearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbsearchActionPerformed(evt);
+            }
+        });
 
         jtable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
@@ -109,6 +111,13 @@ public class BookView2 extends javax.swing.JFrame {
             }
         });
 
+        btnsdm.setText("Sách đã mượn");
+        btnsdm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsdmActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,37 +125,45 @@ public class BookView2 extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addGap(26, 26, 26)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                                .addComponent(txtauthor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(txttitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(txtcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addGap(36, 36, 36)
-                                                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addComponent(btnadd, javax.swing.GroupLayout.Alignment.TRAILING))
-                                                .addGap(93, 93, 93)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(26, 26, 26)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(55, 55, 55)
                                                 .addComponent(txtsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jcbsearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnsearch)))
-                                .addContainerGap(24, Short.MAX_VALUE))
+                                                .addComponent(btnsearch))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addContainerGap(124, Short.MAX_VALUE)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                                                .addComponent(txtauthor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(txttitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(txtcategory, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(36, 36, 36)
+                                                                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                .addGap(99, 99, 99))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(74, 74, 74)
+                                                                .addComponent(btnadd)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(btnsdm)
+                                                                .addGap(59, 59, 59)))
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +188,9 @@ public class BookView2 extends javax.swing.JFrame {
                                                         .addComponent(jLabel4)
                                                         .addComponent(txtcategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(45, 45, 45)
-                                                .addComponent(btnadd)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(btnadd)
+                                                        .addComponent(btnsdm))
                                                 .addGap(44, 44, 44)
                                                 .addComponent(jLabel6)
                                                 .addGap(34, 34, 34)))
@@ -185,6 +204,7 @@ public class BookView2 extends javax.swing.JFrame {
         );
 
         pack();
+
     }// </editor-fold>
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -232,6 +252,13 @@ public class BookView2 extends javax.swing.JFrame {
             rsBook.setVisible(true);
         }
     }
+
+    private void btnsdmActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        BookBrrower bookBrrower = new BookBrrower();
+        bookBrrower.setVisible(true);
+    }
+
 
     private void jcbsearchActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -310,10 +337,12 @@ public class BookView2 extends javax.swing.JFrame {
                 new BookView2().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify
     private javax.swing.JButton btnadd;
+    private javax.swing.JButton btnsdm;
     private javax.swing.JButton btnsearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
