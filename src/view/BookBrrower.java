@@ -5,6 +5,7 @@ package view;/*
 
 import model.objects.Book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class BookBrrower extends javax.swing.JFrame {
      */
     private static List<Book> list;
     public BookBrrower() {
+        list = new ArrayList<>();
         initComponents();
     }
 
@@ -115,8 +117,12 @@ public class BookBrrower extends javax.swing.JFrame {
     }
 
 
-    public static void addBook(Book book) {
+    public void addBook(Book book) {
         list.add(book);
+    }
+
+    public Book getBook(int i) {
+        return list.get(i);
     }
 
     /**
