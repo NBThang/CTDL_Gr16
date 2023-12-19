@@ -5,6 +5,8 @@ package view;/*
 
 import model.objects.Book;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +19,13 @@ public class BookBrrower extends javax.swing.JFrame {
     /**
      * Creates new form Tab2
      */
-    private static List<Book> list;
+    public List<Book> list;
+    DefaultTableModel model1;
     public BookBrrower() {
-        list = new ArrayList<>();
         initComponents();
+        list = new ArrayList<>();
+        model1 = (DefaultTableModel) jTable1.getModel();
+
     }
 
     /**
@@ -31,39 +36,21 @@ public class BookBrrower extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
-
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         btnclose = new javax.swing.JButton();
 
-        jMenu1.setText("jMenu1");
 
-        jMenu2.setText("jMenu2");
-
-        jMenu3.setText("jMenu3");
-
-        jMenu4.setText("jMenu4");
-
-        jMenuItem1.setText("jMenuItem1");
-
-        jMenu5.setText("jMenu5");
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
 
                 },
                 new String [] {
-                        "ID", "Tên Sách", "Thể Loại", "Tác giả"
+                        "ID", "Tên Sách", "Tác giả", "Thể Loại"
                 }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -118,12 +105,24 @@ public class BookBrrower extends javax.swing.JFrame {
 
 
     public void addBook(Book book) {
-        list.add(book);
+            list.add(book);
+            addToTable(book);
     }
 
     public Book getBook(int i) {
         return list.get(i);
     }
+
+    private void addToTable(Book b) {
+        model1.addRow(new Object[] {
+                b.getIdBook(), b.getNameBook(),  b.getAuthor(), b.getCategory()
+        });
+    }
+
+    public boolean isExist(Book book) {
+        return list.contains(book);
+    }
+
 
     /**
      * @param args the command line arguments
@@ -163,14 +162,8 @@ public class BookBrrower extends javax.swing.JFrame {
     // Variables declaration - do not modify
     private javax.swing.JButton btnclose;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration
 }

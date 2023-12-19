@@ -3,15 +3,15 @@ package model.objects;
 public class Book {
     private String idBook;
     private String nameBook;
-    private String category;
     private String author;
-    private String status;
+    private String category;
+
 
     public Book(String idBook, String nameBook, String author, String category) {
         this.idBook = idBook;
         this.nameBook = nameBook;
-        this.category = category;
         this.author = author;
+        this.category = category;
     }
 
     public String getIdBook() {
@@ -46,14 +46,6 @@ public class Book {
         this.author = author;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         return "Book{" +
@@ -61,7 +53,6 @@ public class Book {
                 ", nameBook='" + nameBook + '\'' +
                 ", category='" + category + '\'' +
                 ", author='" + author + '\'' +
-                ", status='" + status + '\'' +
                 '}';
     }
 }

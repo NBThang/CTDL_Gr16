@@ -17,6 +17,7 @@ import java.util.Vector;
  */
 public class BookView2 extends javax.swing.JFrame {
     private ManagerBook manegerBook;
+    BookBrrower bookBrrower = new BookBrrower();
     DefaultTableModel model;
 
     private String driver = "com.microsoft.sqlserver.jdbc.SQLSeverDriver";
@@ -94,7 +95,7 @@ public class BookView2 extends javax.swing.JFrame {
 
                 },
                 new String [] {
-                        "ID", "Tên Sách", "Thể Loại", "Tác Giả"
+                        "ID", "Tên Sách", "Tác Giả", "Thể Loại"
                 }
         ));
         jScrollPane1.setViewportView(jtable);
@@ -297,19 +298,28 @@ public class BookView2 extends javax.swing.JFrame {
 
     private void btnsdmActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        BookBrrower bookBrrower = new BookBrrower();
         bookBrrower.setVisible(true);
     }
 
+    List<String> listIDBrrower = new ArrayList<>();
     private void btnmuonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         int row = jtable.getSelectedRow();
-        Book b = manegerBook.getByIndex(row);
 
-        BookBrrower bookBrrower = new BookBrrower();
-        bookBrrower.addBook(b);
+        String id = jtable.getValueAt(row, 0).toString();
+        String tensach = jtable.getValueAt(row, 1).toString();
+        String tacgia = jtable.getValueAt(row, 2).toString();
+        String theloai = jtable.getValueAt(row, 3).toString();
 
-        System.out.println(bookBrrower.getBook(0).toString());
+        if (listIDBrrower.contains(id)) {
+            JOptionPane.showMessageDialog(this, "Bạn đã mượn sách này rồi");
+        } else {
+            listIDBrrower.add(id);
+            Book b = new Book(id, tensach, tacgia, theloai);
+            bookBrrower.addBook(b);
+        }
+
+
     }
 
     private void btnrenewActionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,7 +382,9 @@ public class BookView2 extends javax.swing.JFrame {
         }
     }
 
-    /**
+
+
+    /*
      * @param args the command line arguments
      */
     public static void main(String args[]) {

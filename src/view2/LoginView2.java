@@ -5,6 +5,7 @@ package view2;/*
 //
 //import view.BookView;
 
+import view.AdminView;
 import view.BookView2;
 
 import javax.swing.*;
@@ -134,6 +135,13 @@ public class LoginView2 extends javax.swing.JFrame {
             ps.setString(2, txtpassdn.getText());
 
             rs = ps.executeQuery();
+            if (txtuserdn.getText().equals("admin") && txtpassdn.getText().equals("admin")) {
+                AdminView adm = new AdminView();
+                adm.setVisible(true);
+                this.dispose();
+                return;
+            }
+
             if (txtuserdn.getText().equals("") || txtpassdn.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "chưa điền thông tin");
             } else if (rs.next()) {

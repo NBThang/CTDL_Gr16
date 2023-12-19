@@ -221,8 +221,9 @@ public class ManagerBook {
 
                     Book b = new Book(id, tensach, tacgia, theloai);
 
-                    listBook.add(b);
-                    hashTable.put(b.getIdBook(), b);
+//                    listBook.add(b);
+//                    hashTable.put(b.getIdBook(), b);
+                    this.addBook(b);
                 }
                 if (rs.getString("id") == null) {
                     return;
@@ -272,18 +273,14 @@ public class ManagerBook {
             Connection con = DriverManager.getConnection(url, user, password);
 
             java.sql.Statement st = con.createStatement();
-            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai)" +
-                    " VALUES("+b.getIdBook()+" , "+b.getNameBook()+" , "+b.getAuthor()+" , "+b.getCategory()+")";
 
-            int resuil = st.executeUpdate(sql);
+            String sql = "DELETE FROM book WHERE id = " + b.getIdBook() +"";
+
+            st.executeUpdate(sql);
 
         } catch (Exception e){
 
         }
     }
 
-    public static void main(String[] args) {
-        ManagerBook m = new ManagerBook();
-        System.out.println(m.listBook.get(0).getIdBook());
-    }
 }
