@@ -1,4 +1,4 @@
-package view2;
+package view;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,14 +16,13 @@ import java.sql.ResultSet;
  *
  * @author Name
  */
-public class RegisterView2 extends javax.swing.JFrame {
+public class RegisterView extends javax.swing.JFrame {
 
     /**
      * Creates new form RegisterView
      */
-    public RegisterView2() {
+    public RegisterView() {
         initComponents();
-
     }
 
     String driver = "com.microsoft.sqlserver.jdbc.SQLSeverDriver";
@@ -40,6 +39,7 @@ public class RegisterView2 extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
+        this.setTitle("Đăng kí");
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -67,7 +67,6 @@ public class RegisterView2 extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setText("Username");
 
@@ -213,7 +212,7 @@ public class RegisterView2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterView2().setVisible(true);
+                new RegisterView().setVisible(true);
             }
         });
     }

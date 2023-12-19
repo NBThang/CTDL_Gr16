@@ -4,10 +4,9 @@ package model.manager;
 import model.hashtables.Entry;
 import model.hashtables.HashTable;
 import model.objects.Book;
-import view.BookView2;
+import view.BookView;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -186,7 +185,7 @@ public class ManagerBook {
 
             int n = ps.executeUpdate();
 
-            BookView2 bv = new BookView2();
+            BookView bv = new BookView();
 
             if (n != 0) {
                 int resuil = st.executeUpdate(sql);

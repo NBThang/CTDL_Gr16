@@ -15,7 +15,7 @@ import java.util.Vector;
  *
  * @author Name
  */
-public class BookView2 extends javax.swing.JFrame {
+public class BookView extends javax.swing.JFrame {
     private ManagerBook manegerBook;
     BookBrrower bookBrrower = new BookBrrower();
     DefaultTableModel model;
@@ -30,7 +30,7 @@ public class BookView2 extends javax.swing.JFrame {
     /**
      * Creates new form BookView
      */
-    public BookView2() {
+    public BookView() {
         initComponents();
         this.manegerBook = new ManagerBook();
         model = (DefaultTableModel) jtable.getModel();
@@ -401,20 +401,20 @@ public class BookView2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BookView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BookView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BookView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BookView2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BookView2().setVisible(true);
+                new BookView().setVisible(true);
             }
         });
     }
