@@ -83,7 +83,7 @@ public class BookView extends javax.swing.JFrame {
 
         jLabel7.setText("Từ Khóa");
 
-        jcbsearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Tên Sách" }));
+        jcbsearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Tên Sách", "Tác Giả", "Thể Loại" }));
         jcbsearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbsearchActionPerformed(evt);
@@ -271,12 +271,8 @@ public class BookView extends javax.swing.JFrame {
                 list.add(book);
                 addToTable(list);
             }
-//            ResuilSearch rsBook = new ResuilSearch();
-//            rsBook.setList(list);
-//            rsBook.display();
-//            rsBook.setVisible(true);
 
-        } else {
+        } else if (jcbsearch.getSelectedItem().equals("Tên Sách")) {
 
             List<Book> list = manegerBook.searchBookByName(txtsearch.getText());
 
@@ -287,12 +283,26 @@ public class BookView extends javax.swing.JFrame {
                 model.setRowCount(0);
                 addToTable(list);
             }
+        } else if (jcbsearch.getSelectedItem().equals("Tác Giả")) {
+            List<Book> list = manegerBook.searchBookByAuthor(txtsearch.getText());
 
-//            ResuilSearch rsBook = new ResuilSearch();
-//            rsBook.setList(list);
-//            rsBook.display();
-//            rsBook.setVisible(true);
+            if (list.size() == 0) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sách bạn yêu cầu");
+                return;
+            } else {
+                model.setRowCount(0);
+                addToTable(list);
+            }
+        } else if (jcbsearch.getSelectedItem().equals("Thể Loại")) {
+            List<Book> list = manegerBook.searchBookByCategory(txtsearch.getText());
 
+            if (list.size() == 0) {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy sách bạn yêu cầu");
+                return;
+            } else {
+                model.setRowCount(0);
+                addToTable(list);
+            }
         }
     }
 
@@ -345,7 +355,7 @@ public class BookView extends javax.swing.JFrame {
         for (int i = 0; i < list.size(); i++) {
             Book b = list.get(i);
             model.addRow(new Object[] {
-                    b.getIdBook(), b.getNameBook(), b.getCategory(), b.getAuthor()
+                    b.getIdBook(), b.getNameBook(), b.getAuthor(), b.getCategory()
             });
         }
     }
