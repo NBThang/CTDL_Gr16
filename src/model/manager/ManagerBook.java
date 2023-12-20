@@ -7,6 +7,7 @@ import model.objects.Book;
 import view.BookView;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -102,11 +103,7 @@ public class ManagerBook {
         for (LinkedList<Entry<String, Book>> bucket : hashTable.getBuckets()) {
             for (Entry<String, Book> entry : bucket) {
                 Book book = entry.getValue();
-//                if (book.getNameBook().equalsIgnoreCase(bookName)) {
-//                    booksByName.add(book);
-//                }
-
-                if (book.getNameBook().contains(bookName)) {
+                if (book.getNameBook().equalsIgnoreCase(bookName)) {
                     booksByName.add(book);
                 }
             }
@@ -161,8 +158,8 @@ public class ManagerBook {
     }
 
     public int size() {
-        return hashTable.size();
-//        return listBook.size();
+//        return hashTable.size();
+        return listBook.size();
     }
 
     private void addSQL(Book b) {
@@ -171,18 +168,10 @@ public class ManagerBook {
             Connection con = DriverManager.getConnection(url, user, password);
 
             java.sql.Statement st = con.createStatement();
-//            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai)" +
-//                    " VALUES("+b.getIdBook()+" , "+b.getNameBook()+" , "+b.getAuthor()+" , "+b.getCategory()+")";
-
-            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai)" +
+                    " VALUES("+b.getIdBook()+" , "+b.getNameBook()+" , "+b.getAuthor()+" , "+b.getCategory()+")";
 
             PreparedStatement ps = con.prepareStatement(sql);
-
-            ps.setString(1, b.getIdBook());
-            ps.setString(2, b.getNameBook());
-            ps.setString(3, b.getAuthor());
-            ps.setString(4, b.getCategory());
-
             int n = ps.executeUpdate();
 
             BookView bv = new BookView();
@@ -220,9 +209,8 @@ public class ManagerBook {
 
                     Book b = new Book(id, tensach, tacgia, theloai);
 
-//                    listBook.add(b);
-//                    hashTable.put(b.getIdBook(), b);
-                    this.addBook(b);
+                    listBook.add(b);
+                    hashTable.put(b.getIdBook(), b);
                 }
                 if (rs.getString("id") == null) {
                     return;
@@ -272,14 +260,18 @@ public class ManagerBook {
             Connection con = DriverManager.getConnection(url, user, password);
 
             java.sql.Statement st = con.createStatement();
+            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai)" +
+                    " VALUES("+b.getIdBook()+" , "+b.getNameBook()+" , "+b.getAuthor()+" , "+b.getCategory()+")";
 
-            String sql = "DELETE FROM book WHERE id = " + b.getIdBook() +"";
-
-            st.executeUpdate(sql);
+            int resuil = st.executeUpdate(sql);
 
         } catch (Exception e){
 
         }
     }
 
+    public static void main(String[] args) {
+        ManagerBook m = new ManagerBook();
+        System.out.println(m.listBook.get(0).getIdBook());
+    }
 }

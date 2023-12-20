@@ -16,6 +16,7 @@ import java.util.Vector;
  * @author Name
  */
 public class BookView extends javax.swing.JFrame {
+
     private ManagerBook manegerBook;
     BookBrrower bookBrrower = new BookBrrower();
     DefaultTableModel model;
@@ -455,3 +456,4 @@ public class BookView extends javax.swing.JFrame {
     // End of variables declaration
 
 }
+
