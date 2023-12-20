@@ -271,9 +271,10 @@ public class ManagerBook {
             Connection con = DriverManager.getConnection(url, user, password);
 
             java.sql.Statement st = con.createStatement();
-            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai)" +
-                    " VALUES("+b.getIdBook()+" , "+b.getNameBook()+" , "+b.getAuthor()+" , "+b.getCategory()+")";
+//            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai)" +
+//                    " VALUES("+b.getIdBook()+" , "+b.getNameBook()+" , "+b.getAuthor()+" , "+b.getCategory()+")";
 
+            String sql = "DELETE FROM BOOK WHERE id = '" + b.getIdBook() +"'";
             int resuil = st.executeUpdate(sql);
 
         } catch (Exception e){
