@@ -217,7 +217,6 @@ public class LoginView extends javax.swing.JFrame {
     }
 
 
-
     // Variables declaration - do not modify
     private javax.swing.JButton btndn;
     private javax.swing.JButton btnlogin;

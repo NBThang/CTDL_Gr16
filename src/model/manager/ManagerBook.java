@@ -67,17 +67,13 @@ public class ManagerBook {
         return hashTable.get(idBook);
     }
 
-//    public List<Book> searchBookById(String idBook) {
-//        if ()
-//    }
-
     public List<Book> searchBookByAuthor(String authorName) {
         List<Book> booksByAuthor = new ArrayList<>();
 
         for (LinkedList<Entry<String, Book>> bucket : hashTable.getBuckets()) {
             for (Entry<String, Book> entry : bucket) {
                 Book book = entry.getValue();
-                if (book.getAuthor().contains(authorName)) {
+                if (book.getAuthor().toLowerCase().contains(authorName)) {
                     booksByAuthor.add(book);
                 }
             }
@@ -92,7 +88,7 @@ public class ManagerBook {
         for (LinkedList<Entry<String, Book>> bucket : hashTable.getBuckets()) {
             for (Entry<String, Book> entry : bucket) {
                 Book book = entry.getValue();
-                if (book.getCategory().contains(category)) {
+                if (book.getCategory().toLowerCase().contains(category)) {
                     booksByTitle.add(book);
                 }
             }

@@ -230,7 +230,7 @@ public class BookView extends javax.swing.JFrame {
     }// </editor-fold>
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        String id = txtid.getText();
+        String id = txtid.getText().toUpperCase();
         String title = txttitle.getText();
         String author = txtauthor.getText();
         String catagory = txtcategory.getText();
@@ -249,7 +249,7 @@ public class BookView extends javax.swing.JFrame {
         if (sizeBefor != sizeAfter) {
             addToTable(book);
         }else {
-            JOptionPane.showMessageDialog(this, "Error");
+            JOptionPane.showMessageDialog(this, "ID bị trùng");
         }
     }
 
@@ -262,7 +262,7 @@ public class BookView extends javax.swing.JFrame {
 
         if (jcbsearch.getSelectedItem().equals("ID")) {
             List<Book> list = new ArrayList<>();
-            Book book = manegerBook.searchBookById(txtsearch.getText().toLowerCase());
+            Book book = manegerBook.searchBookById(txtsearch.getText().toUpperCase());
 
             if(book == null) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy sách bạn yêu cầu");
