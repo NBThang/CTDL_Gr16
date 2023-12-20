@@ -42,7 +42,10 @@ public class HashTable<K, V> {
         LinkedList<Entry<K, V>> bucket = buckets[bucketIndex];
 
         for (Entry<K, V> entry : bucket) {
-            if (entry.getKey().equals(key)) {
+//            if (entry.getKey().equals(key)) {
+//                return entry.getValue();
+//            }
+            if (entry.getKey().toString().contains(key+"")) {
                 return entry.getValue();
             }
         }

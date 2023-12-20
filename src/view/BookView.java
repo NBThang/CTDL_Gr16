@@ -315,6 +315,10 @@ public class BookView extends javax.swing.JFrame {
     private void btnmuonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         int row = jtable.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn sách");
+            return;
+        }
 
         String id = jtable.getValueAt(row, 0).toString();
         String tensach = jtable.getValueAt(row, 1).toString();
@@ -327,9 +331,8 @@ public class BookView extends javax.swing.JFrame {
             listIDBrrower.add(id);
             Book b = new Book(id, tensach, tacgia, theloai);
             bookBrrower.addBook(b);
+            JOptionPane.showMessageDialog(this, "Mượn hành công");
         }
-
-
     }
 
     private void btnrenewActionPerformed(java.awt.event.ActionEvent evt) {
