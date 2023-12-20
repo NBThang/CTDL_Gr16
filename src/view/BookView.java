@@ -274,7 +274,6 @@ public class BookView extends javax.swing.JFrame {
             }
 
         } else if (jcbsearch.getSelectedItem().equals("Tên Sách")) {
-
             List<Book> list = manegerBook.searchBookByName(txtsearch.getText().toLowerCase());
 
             if (list.size() == 0) {

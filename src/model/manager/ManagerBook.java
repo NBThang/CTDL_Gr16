@@ -107,7 +107,7 @@ public class ManagerBook {
         for (LinkedList<Entry<String, Book>> bucket : hashTable.getBuckets()) {
             for (Entry<String, Book> entry : bucket) {
                 Book book = entry.getValue();
-                if (book.getNameBook().equalsIgnoreCase(bookName)) {
+                if (book.getNameBook().toLowerCase().contains(bookName)) {
                     booksByName.add(book);
                 }
             }
@@ -162,8 +162,8 @@ public class ManagerBook {
     }
 
     public int size() {
-//        return hashTable.size();
-        return listBook.size();
+        return hashTable.size();
+//        return listBook.size();
     }
 
     private void addSQL(Book b) {
@@ -172,10 +172,17 @@ public class ManagerBook {
             Connection con = DriverManager.getConnection(url, user, password);
 
             java.sql.Statement st = con.createStatement();
-            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai)" +
-                    " VALUES("+b.getIdBook()+" , "+b.getNameBook()+" , "+b.getAuthor()+" , "+b.getCategory()+")";
+//            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai)" +
+//                    " VALUES("+b.getIdBook()+" , "+b.getNameBook()+" , "+b.getAuthor()+" , "+b.getCategory()+")";
+
+            String sql = "INSERT INTO BOOK (id, tensach, tacgia, theloai) VALUES (?, ?, ?, ?)";
 
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, b.getIdBook());
+            ps.setString(2, b.getNameBook());
+            ps.setString(3, b.getAuthor());
+            ps.setString(4, b.getCategory());
+
             int n = ps.executeUpdate();
 
             BookView bv = new BookView();
