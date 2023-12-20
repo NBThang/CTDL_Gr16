@@ -350,7 +350,7 @@ public class BookView extends javax.swing.JFrame {
 //        Book b = manegerBook.getByIndex(manegerBook.size() - 1);
 
         model.addRow(new Object[] {
-                b.getIdBook().trim(), b.getNameBook().trim(), b.getCategory().trim(), b.getAuthor().trim()
+                b.getIdBook().trim(), b.getNameBook().trim(), b.getAuthor().trim(), b.getCategory().trim()
         });
     }
 

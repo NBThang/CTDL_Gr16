@@ -25,7 +25,6 @@ public class BookBrrower extends javax.swing.JFrame {
         initComponents();
         list = new ArrayList<>();
         model1 = (DefaultTableModel) jTable1.getModel();
-
     }
 
     /**
