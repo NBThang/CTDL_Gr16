@@ -261,7 +261,7 @@ public class BookView extends javax.swing.JFrame {
 
         if (jcbsearch.getSelectedItem().equals("ID")) {
             List<Book> list = new ArrayList<>();
-            Book book = manegerBook.searchBookById(txtsearch.getText());
+            Book book = manegerBook.searchBookById(txtsearch.getText().toLowerCase());
 
             if(book == null) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy sách bạn yêu cầu");
@@ -274,7 +274,7 @@ public class BookView extends javax.swing.JFrame {
 
         } else if (jcbsearch.getSelectedItem().equals("Tên Sách")) {
 
-            List<Book> list = manegerBook.searchBookByName(txtsearch.getText());
+            List<Book> list = manegerBook.searchBookByName(txtsearch.getText().toLowerCase());
 
             if (list.size() == 0) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy sách bạn yêu cầu");
@@ -284,7 +284,7 @@ public class BookView extends javax.swing.JFrame {
                 addToTable(list);
             }
         } else if (jcbsearch.getSelectedItem().equals("Tác Giả")) {
-            List<Book> list = manegerBook.searchBookByAuthor(txtsearch.getText());
+            List<Book> list = manegerBook.searchBookByAuthor(txtsearch.getText().toLowerCase());
 
             if (list.size() == 0) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy sách bạn yêu cầu");
@@ -294,7 +294,7 @@ public class BookView extends javax.swing.JFrame {
                 addToTable(list);
             }
         } else if (jcbsearch.getSelectedItem().equals("Thể Loại")) {
-            List<Book> list = manegerBook.searchBookByCategory(txtsearch.getText());
+            List<Book> list = manegerBook.searchBookByCategory(txtsearch.getText().toLowerCase());
 
             if (list.size() == 0) {
                 JOptionPane.showMessageDialog(this, "Không tìm thấy sách bạn yêu cầu");
@@ -350,7 +350,7 @@ public class BookView extends javax.swing.JFrame {
 //        Book b = manegerBook.getByIndex(manegerBook.size() - 1);
 
         model.addRow(new Object[] {
-                b.getIdBook(), b.getNameBook(), b.getCategory(), b.getAuthor()
+                b.getIdBook().trim(), b.getNameBook().trim(), b.getCategory().trim(), b.getAuthor().trim()
         });
     }
 
